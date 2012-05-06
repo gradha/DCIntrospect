@@ -163,16 +163,9 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarTapped) name:kDCIntrospectNotificationStatusBarTapped object:nil];
 	
 	// reclaim the keyboard after dismissal if it is taken
-	[[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification
-													  object:nil
-													   queue:nil
-												  usingBlock:^(NSNotification *notification) {
-													  // needs to be done after a delay or else it doesn't work for some reason.
-													  if (self.keyboardBindingsOn)
-														  [self performSelector:@selector(takeFirstResponder)
-																	 withObject:nil
-																	 afterDelay:0.1];
-												  }];
+	[[NSNotificationCenter defaultCenter] addObserver:self
+		selector:@selector(gotKeyboardWillHideNotification)
+		name:UIKeyboardWillHideNotification object:nil];
 	
 	// listen for device orientation changes to adjust the status bar
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -183,6 +176,16 @@ id UITextInputTraits_valueForKey(id self, SEL _cmd, NSString *key)
 	
 	NSLog(@"DCIntrospect is setup. %@ to start.", [kDCIntrospectKeysInvoke isEqualToString:@" "] ? @"Push the space bar" : [NSString stringWithFormat:@"Type '%@'",  kDCIntrospectKeysInvoke]);
 }
+
+- (void)gotKeyboardWillHideNotification
+{
+	if (self.keyboardBindingsOn)
+		[self performSelector:@selector(takeFirstResponder)
+				   withObject:nil
+				   afterDelay:0.1];
+
+}
+
 
 - (void)takeFirstResponder
 {
