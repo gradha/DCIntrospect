@@ -5,6 +5,7 @@
 #define kDCIntrospectFlashOnRedrawColor [UIColor colorWithRed:1.0f green:0.0f blue:0.0f alpha:0.4f]			// UIColor
 #define kDCIntrospectFlashOnRedrawFlashLength 0.03f													// NSTimeInterval
 #define kDCIntrospectOpaqueColor [UIColor redColor]													// UIColor
+#define kDCIntrospectTemporaryDisableDuration 10.                           // Seconds
 
 //////////////////
 // Key Bindings //
@@ -23,15 +24,15 @@
 #define kDCIntrospectKeysEnterBlockMode					@"b"		// enters block action mode
 
 // When introspector is invoked and a view is selected //
-#define kDCIntrospectKeysNudgeViewLeft					@"4"		// nudges the selected view in given direction
-#define kDCIntrospectKeysNudgeViewRight					@"6"		//
-#define kDCIntrospectKeysNudgeViewUp					@"8"		//
-#define kDCIntrospectKeysNudgeViewDown					@"2"		//
+#define kDCIntrospectKeysNudgeViewLeft					@"q"		// nudges the selected view in given direction
+#define kDCIntrospectKeysNudgeViewRight					@"r"		//
+#define kDCIntrospectKeysNudgeViewUp					@"w"		//
+#define kDCIntrospectKeysNudgeViewDown					@"e"		//
 #define kDCIntrospectKeysCenterInSuperview				@"5"		// centers the selected view in it's superview
-#define kDCIntrospectKeysIncreaseWidth					@"9"		// increases/decreases the width/height of selected view
-#define kDCIntrospectKeysDecreaseWidth					@"7"		//
-#define kDCIntrospectKeysIncreaseHeight					@"3"		//
-#define kDCIntrospectKeysDecreaseHeight					@"1"		//
+#define kDCIntrospectKeysIncreaseWidth					@"R"		// increases/decreases the width/height of selected view
+#define kDCIntrospectKeysDecreaseWidth					@"Q"		//
+#define kDCIntrospectKeysIncreaseHeight					@"E"		//
+#define kDCIntrospectKeysDecreaseHeight					@"W"		//
 #define kDCIntrospectKeysLogCodeForCurrentViewChanges	@"0"		// prints code to the console of the changes to the current view.  If the view has not been changed nothing will be printed.  For example, if you nudge a view or change it's rect with the nudge keys, this will log '<#view#>.frame = CGRectMake(50.0, ..etc);'.  Or if you set it's name using setName:forObject:accessedWithSelf: it will use the name provided, for example 'myView.frame = CGRectMake(...);'.  Setting accessedWithSelf to YES would output 'self.myView.frame = CGRectMake(...);'.
 
 #define kDCIntrospectKeysIncreaseViewAlpha				@"+"		// increases/decreases the selected views alpha value
@@ -39,7 +40,7 @@
 
 #define kDCIntrospectKeysSetNeedsDisplay				@"d"		// calls setNeedsDisplay on selected view
 #define kDCIntrospectKeysSetNeedsLayout					@"l"		// calls setNeedsLayout on selected view
-#define kDCIntrospectKeysReloadData						@"r"		// calls reloadData on selected view if it's a UITableView
+#define kDCIntrospectKeysReloadData						@"T"		// calls reloadData on selected view if it's a UITableView
 #define kDCIntrospectKeysLogProperties					@"p"		// logs all properties of the selected view
 #define kDCIntrospectKeysLogAccessibilityProperties		@"a"		// logs accessibility info (useful for automated view tests - thanks to @samsoffes for the idea)
 #define kDCIntrospectKeysLogViewRecursive				@"v"		// calls private method recursiveDescription which logs selected view heirachy
@@ -50,3 +51,6 @@
 #define kDCIntrospectKeysMoveDownToFirstSubview			@"h"
 #define kDCIntrospectKeysMoveToNextSiblingView			@"j"
 #define kDCIntrospectKeysMoveToPrevSiblingView			@"g"
+
+#define kDCIntrospectKeysEnterGDB						@"`"			// enters GDB
+#define kDCIntrospectKeysDisableForPeriod		@"~"			// disables DCIntrospect for a given period (see kDCIntrospectTemporaryDisableDuration)
